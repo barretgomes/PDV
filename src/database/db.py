@@ -88,6 +88,52 @@ class Database:
         self.connection.commit()
         print("✅ Tabelas criadas com sucesso!")
 
+    def save_cliente(self, nome, cpf=None, email=None, telefone=None, endereco=None):
+        """Salva um cliente no banco de dados."""
+        if self.connection is None:
+            raise ValueError("Conexão com banco de dados não foi criada")
+
+        cursor = self.connection.cursor()
+        cursor.execute(
+            """
+            INSERT INTO clientes (nome, cpf, email, telefone, endereco)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (nome, cpf, email, telefone, endereco),
+        )
+        self.connection.commit()
+        return cursor.lastrowid
+
+    def listar_clientes(self):
+        """Lista todos os clientes cadastrados."""
+        if self.connection is None:
+            return []
+
+        cursor = self.connection.cursor()
+        cursor.execute(
+            """
+            SELECT id, nome, cpf, email, telefone, endereco, data_cadastro
+            FROM clientes
+            ORDER BY id DESC
+            """
+        )
+        rows = cursor.fetchall()
+
+        clientes = []
+        for row in rows:
+            clientes.append(
+                {
+                    "id": row[0],
+                    "nome": row[1],
+                    "cpf": row[2],
+                    "email": row[3],
+                    "telefone": row[4],
+                    "endereco": row[5],
+                    "data_cadastro": row[6],
+                }
+            )
+        return clientes
+
     def close_connection(self):
         """Fecha a conexão com o banco de dados"""
         if self.connection:

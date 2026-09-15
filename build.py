@@ -37,7 +37,7 @@ def main():
 
     # Instalar PyInstaller
     print("📦 Instalando PyInstaller...")
-    if not run_command("pip install pyinstaller", "Instalando PyInstaller"):
+    if not run_command(f"{sys.executable} -m pip install pyinstaller", "Instalando PyInstaller"):
         return False
 
     # Criar diretório de build
@@ -46,12 +46,12 @@ def main():
 
     # Configurar PyInstaller
     cmd = (
-        "pyinstaller "
+        f"{sys.executable} -m PyInstaller "
         "--name=PDV "
         "--windowed "
         "--onefile "
         "--distpath=dist "
-        "--buildpath=build "
+        "--workpath=build "
         "--specpath=build "
         "--hidden-import=PyQt5 "
         "--hidden-import=sqlite3 "

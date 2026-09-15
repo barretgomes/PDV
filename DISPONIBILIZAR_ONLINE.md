@@ -1,4 +1,4 @@
-# 🌐 Como Deixar PDV Online no GitHub
+https://github.com/barretgomes/PDV/releaseshttps://github.com/barretgomes/PDV/releases# 🌐 Como Deixar PDV Online no GitHub
 
 ## 📍 Seu PDV JÁ ESTÁ ONLINE!
 
